@@ -1,0 +1,66 @@
+﻿@model CMS.Areas.Admin.Models.VMKullaniciVeAlert
+@{
+    ViewBag.Title = CMS.Resources.Dil.ayarlar + " - " + CMS.Resources.Dil.profil;
+}
+@using (Html.BeginForm("Ayarlar", "Profil", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>@User.Identity.Name</h4>
+        @if (Model != null)
+        {
+            if (Model.Alert != null)
+            {
+                <div class="alert alert-@Model.Alert.Tip">
+                    @Model.Alert.Icerik
+                </div>
+            }
+        }
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Kullanici.Kid)
+
+        @Html.HiddenFor(model => model.Kullanici.Kadi)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Kullanici.Sifre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Kullanici.Sifre, new { htmlAttributes = new { @class = "form-control", placeholder = CMS.Resources.Dil.degistirilecekyenisifre } })
+                @Html.ValidationMessageFor(model => model.Kullanici.Sifre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Kullanici.AdSoyad, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Kullanici.AdSoyad, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Kullanici.AdSoyad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Kullanici.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Kullanici.Email, new { htmlAttributes = new { @class = "form-control", required = "required", type = "email" } })
+                @Html.ValidationMessageFor(model => model.Kullanici.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Kullanici.Foto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img id="kulfotosu" src="@Html.DisplayFor(model=>model.Kullanici.Foto)" class="img-thumbnail" width="100" />
+                <input type="file" id="kulfoto" name="dosya" />
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.Kullanici.Yetki)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@CMS.Resources.Dil.kaydet" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}

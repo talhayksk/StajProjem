@@ -1,0 +1,49 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/Site.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Raleway&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e7f6bd17b7.js"></script>
+</head>
+<body>
+    @Html.Partial("Navbar")
+    <div class="container-fluid">
+        <div class="row">
+            <!-- SOL PANEL -->
+            <div class="col-md-8">
+                @RenderBody()
+            </div>
+            <!-- ./SOL PANEL -->
+            <!-- SAĞ PANEL -->
+            <div class="col-md-4 mt-2 widgets">
+                <div class="card">
+                    <div class="card-body">
+                        @using (Html.BeginForm("Ara","Makale",FormMethod.Post))
+                        {
+                            <div class="input-group">
+                                <input type="text" placeholder="@CMS.Resources.Dil.ara" name="aranacak" class="form-control">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-outline-primary"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+
+                @{Html.RenderAction("Kategoriler", "Home");}
+
+                @{Html.RenderAction("SonPaylasilan", "Home");}
+            </div>
+            <!-- ./SAĞ PANEL -->
+        </div>
+    </div>
+    <footer class="sticky-footer text-center bg-dark text-light p-3">
+        Copyright &copy; 2019 - Fatih ÖZPOLAT
+    </footer>
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+</body>
+</html>

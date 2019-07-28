@@ -1,0 +1,19 @@
+﻿@model List<CMS.Models.Makale>
+
+<div class="card mt-5">
+    <div class="card-header">
+        @CMS.Resources.Dil.sonpaylasilan
+    </div>
+    <div class="card-body p-1">
+        @foreach (var item in Model)
+        {
+            <div class="card my-1">
+                <div class="card-body bg-secondary text-light text-right">
+                    <h5 class="card-title">@item.Baslik</h5>
+                    <p class="card-text">@item.KisaIcerik</p>
+                    <a href="/Makale/Oku/@item.Mid" class="btn btn-info">@CMS.Resources.Dil.devaminioku</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

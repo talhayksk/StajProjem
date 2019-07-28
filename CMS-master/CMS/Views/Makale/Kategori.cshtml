@@ -1,0 +1,16 @@
+﻿@model List<CMS.Models.Makale>
+@{
+
+    //Kategoride içerik yoksa Default olarak Kategori Diye yazı çekecek
+    ViewBag.Title = CMS.Resources.Dil.kategori;
+
+    //Eğer ki Kategori de içerik var sa kategorinin başlığını alacak ve Title da aynı şekilde Başlıkla değişecek
+    if (Model.Count > 0)
+    {
+        ViewBag.Title = Model[0].Kategori.KategoriAdi;
+        <h2 class="mt-2">@ViewBag.Title</h2>
+    }
+}
+
+@* Hazır olarak Kullandığım AnaSayfa daki Makaleleri Getiren AnaSayfaMakale isimli PartialView *@
+@Html.Partial("AnaSayfaMakale")

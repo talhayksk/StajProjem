@@ -1,0 +1,26 @@
+﻿@model CMS.Models.Kullanici
+@{
+    ViewBag.Title = CMS.Resources.Dil.profil;
+}
+
+    <div class="row mt-5">
+        <div class="col-md-4 offset-md-4">
+            <div class="card bg-dark text-light shadow-lg">
+                <div class="ustfoto">
+                    <img src="@Model.Foto" class="rounded-circle shadow-lg" />
+                </div>
+                <div class="card-body pt-5">
+                    <h4 class="card-title mt-4 text-center">@Model.AdSoyad</h4>
+                    <p>
+                        <i class="fas fa-user"></i> @CMS.Resources.Dil.kadi : @Model.Kadi <br />
+                        <i class="fas fa-crown"></i> @CMS.Resources.Dil.yetki : @(Model.Yetki.Equals("a") ? "Yönetici" : "Kullanıcı") <br />
+                        <i class="fas fa-envelope"></i> Email: @Model.Email <br />
+                        <i class="fas fa-calendar"></i> @CMS.Resources.Dil.uyeliktarihi: @Model.UyelikTarihi <br />
+                    </p>
+                    <p class="text-center p-0 m-0">
+                        <a href="/Admin/Profil/Ayarlar" id="pduzenle" class="btn btn-success">@CMS.Resources.Dil.duzenle</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,12 @@
+﻿@model List<CMS.Models.Kategori>
+<div class="card mt-3">
+    <div class="card-header">
+        @CMS.Resources.Dil.kategoriler
+    </div>
+    <div class="list-group list-group-flush">
+        @foreach (var item in Model)
+        {
+            <a href="/Makale/Kategori/@item.KatId" class="list-group-item list-group-item-action">@item.KategoriAdi <span class="wid-kat-sayi">@item.Makale.Count</span></a>
+        }
+    </div>
+</div>

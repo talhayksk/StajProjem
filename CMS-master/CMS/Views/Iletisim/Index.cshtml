@@ -1,0 +1,94 @@
+﻿@model CMS.Models.VMIletisim
+@{
+    Layout = null;
+    ViewBag.Title = CMS.Resources.Dil.iletisim;
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/Site.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Raleway&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e7f6bd17b7.js"></script>
+</head>
+<body>
+    @Html.Partial("Navbar")
+    <div class="container-fluid">
+        <div class="row">
+            <!-- SOL PANEL -->
+            <div class="col-md-12">
+                <div class="row mb-4">
+                    <div class="col-md-12 my-4">
+                        <h3 class="baslik">@CMS.Resources.Dil.iletisim</h3>
+                        @if (Model != null)
+                        {
+                            if (Model.alert != null)
+                            {
+                                <div class="alert alert-@Model.alert.Tip">
+                                    @Model.alert.Icerik
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="col-md-6">
+                        @using (Html.BeginForm("Index", "Iletisim", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.adsoyad, new { @class = "form-control shadow-sm", placeholder = CMS.Resources.Dil.adsoyad, required="required"})
+                                    </div>
+                                    <div class="col-md-6 mt-md-0 mt-4">
+                                        @Html.TextBoxFor(m => m.tc, new { @class = "form-control shadow-sm", placeholder = "TC No", required="required" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.baslik, new { @class = "form-control shadow-sm", placeholder = CMS.Resources.Dil.konu, required="required" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.telefon, new {@class="form-control shadow-sm", placeholder= CMS.Resources.Dil.telefon, required="required"})
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group shadow-sm py-2">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="file" name="dosya" id="dosya">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @Html.TextAreaFor(m => m.mesaj, new {@class="form-control shadow-sm",rows="8", placeholder=CMS.Resources.Dil.mesaj, required="required"})
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-success btn-block shadow-sm">Gönder</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-6 iletisimBilgi">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d102251.13913553882!2d34.454206430583625!3d36.786203505901575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15278aba164e2dc1%3A0xd9c255f861c368ed!2zS2FyZGVsZW4gWWF6xLFsxLFt!5e0!3m2!1str!2str!4v1563779509088!5m2!1str!2str" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- ./SOL PANEL -->
+        </div>
+    </div>
+    <footer class="sticky-footer text-center bg-dark text-light p-3">
+        Copyright &copy; 2019 - Fatih ÖZPOLAT
+    </footer>
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+</body>
+</html>
+

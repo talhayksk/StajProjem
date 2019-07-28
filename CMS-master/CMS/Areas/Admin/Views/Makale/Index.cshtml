@@ -1,0 +1,123 @@
+﻿@model IEnumerable<CMS.Models.Makale>
+
+@{
+    ViewBag.Title = CMS.Resources.Dil.makaleler;
+}
+
+<p>
+    @Html.ActionLink(CMS.Resources.Dil.yeniolustur, "Create", null, new { @class = "btn btn-success" })
+</p>
+<div class="table-responsive">
+    <table class="table table-bordered makaleler">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Baslik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KisaIcerik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Foto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EklenmeTarihi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GuncellemeTarihi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kategori.KategoriAdi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kullanici.AdSoyad)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr id="tr-@item.Mid">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Baslik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KisaIcerik)
+                </td>
+                <td>
+                    <img width="200" src="@Html.DisplayFor(modelItem => item.Foto)" class="img-thumbnail" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EklenmeTarihi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GuncellemeTarihi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kategori.KategoriAdi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kullanici.AdSoyad)
+                </td>
+                <td>
+                    @if (item.Kullanici.Kadi == User.Identity.Name)
+                    {
+                        @Html.ActionLink(CMS.Resources.Dil.duzenle, "Edit", new { id = item.Mid }, new { @class = "btn btn-success mb-1 w-100" }) <br />
+                        <a href="#" data-id="@item.Mid" data-baslik="@item.Baslik" class="btn btn-danger mb-1 w-100 makalesil">@CMS.Resources.Dil.sil</a>
+                    }
+                    @Html.ActionLink(CMS.Resources.Dil.detaylar, "Details", new { id = item.Mid }, new { @class = "btn btn-info mb-1 w-100" }) <br />
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            $(".makaleler").on("click", ".makalesil", function () {
+                var id = $(this).data("id");
+                var baslik = $(this).data("baslik");
+
+                Swal.fire({
+                    animation: false,
+                    customClass: {
+                        popup: 'animated flipInX'
+                    },
+                    title: '@CMS.Resources.Dil.eminmisin',
+                    text: "@CMS.Resources.Dil.silinecekmetin : " + baslik,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: '<i class="fas fa-times"></i>',
+                    confirmButtonText: '<i class="fas fa-check"></i>'
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            method: "POST",
+                            url: "/Admin/Makale/Delete/" + id,
+                            dataType: "JSON",
+                            success: function (data) {
+                                Swal.fire(
+                                    data.baslik,
+                                    data.icerik,
+                                    'success'
+                                );
+
+                                $("#tr-" + id).fadeOut(1000);
+                            },
+                            error: function (data) {
+                                Swal.fire(
+                                    '@CMS.Resources.Dil.hata',
+                                    '@CMS.Resources.Dil.birhataolustu',
+                                    'error'
+                                )
+                            }
+                        });
+                    }
+                })
+            });
+        });
+    </script>
+}

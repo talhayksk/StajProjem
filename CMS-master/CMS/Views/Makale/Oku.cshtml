@@ -1,0 +1,25 @@
+﻿@model CMS.Models.Makale
+@{
+    ViewBag.Title = Model.Baslik;
+}
+
+<div class="row my-2">
+    <div class="col-md-12 mb-2">
+        <h1 class="font-weight-lighter">@Model.Baslik</h1>
+    </div>
+    @if (Model.Foto != null)
+    {
+        <div class="col-md-12 text-center mb-2">
+            <img src="@Model.Foto" alt="@Model.Baslik" class="img-fluid rounded img-thumbnail" />
+        </div>
+    }
+    <div class="col-md-12 mb-2 text-right">
+        <span class="katkisitarih shadow mt-1"><i class="fas fa-calendar"></i> @Model.EklenmeTarihi</span>
+        <a href="/Makale/Kullanici/@Model.Kid"><span class="katkisitarih shadow mt-1"><i class="fas fa-user"></i> @Model.Kullanici.AdSoyad</span></a>
+        <a href="/Makale/Kategori/@Model.KatId"><span class="katkisitarih shadow mt-1"><i class="fas fa-folder"></i> @Model.Kategori.KategoriAdi</span></a>
+    </div>
+    <div class="col-md-12">
+        @Html.Raw(Model.Icerik)
+    </div>
+</div>
+

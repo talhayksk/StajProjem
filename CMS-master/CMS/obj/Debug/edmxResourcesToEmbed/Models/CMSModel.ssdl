@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="KatId" />
+    </Key>
+    <Property Name="KatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KategoriAdi" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kullanici">
+    <Key>
+      <PropertyRef Name="Kid" />
+    </Key>
+    <Property Name="Kid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Kadi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Sifre" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="AdSoyad" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="UyelikTarihi" Type="datetime" />
+    <Property Name="Foto" Type="nvarchar" MaxLength="500" />
+    <Property Name="Yetki" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Makale">
+    <Key>
+      <PropertyRef Name="Mid" />
+    </Key>
+    <Property Name="Mid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Baslik" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="KisaIcerik" Type="nvarchar" MaxLength="500" />
+    <Property Name="Icerik" Type="nvarchar(max)" />
+    <Property Name="Foto" Type="nvarchar" MaxLength="500" />
+    <Property Name="EklenmeTarihi" Type="datetime" />
+    <Property Name="GuncellemeTarihi" Type="datetime" />
+    <Property Name="KatId" Type="int" Nullable="false" />
+    <Property Name="Kid" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Makale__KatId__4316F928">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Makale" Type="Self.Makale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="KatId" />
+      </Principal>
+      <Dependent Role="Makale">
+        <PropertyRef Name="KatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Makale__Kid__440B1D61">
+    <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Makale" Type="Self.Makale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanici">
+        <PropertyRef Name="Kid" />
+      </Principal>
+      <Dependent Role="Makale">
+        <PropertyRef Name="Kid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CMSModelStoreContainer">
+    <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Makale" EntityType="Self.Makale" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Makale__KatId__4316F928" Association="Self.FK__Makale__KatId__4316F928">
+      <End Role="Kategori" EntitySet="Kategori" />
+      <End Role="Makale" EntitySet="Makale" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Makale__Kid__440B1D61" Association="Self.FK__Makale__Kid__440B1D61">
+      <End Role="Kullanici" EntitySet="Kullanici" />
+      <End Role="Makale" EntitySet="Makale" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

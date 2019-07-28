@@ -1,0 +1,83 @@
+﻿body {
+    font-family: 'Raleway', sans-serif;
+}
+.bg-iste {
+    background-color: #DB385C;
+}
+.btn-outline-iste {
+    color: #DB385C;
+    border-color: #DB385C;
+}
+.btn-outline-iste:hover{
+    background-color: #DB385C;
+    color:#fff;
+}
+.topmenu li{
+    margin:0 10px;
+}
+.topmenu li:hover {
+    background-color: #a52c46
+}
+
+.fontozel {
+    font-family: 'Pacifico', cursive;
+}
+
+.widgets .card-header {
+    background-color: #DB385C;
+    color: #fff;
+    font-size: 20px;
+    font-family: 'Pacifico', cursive;
+}
+
+span.wid-kat-sayi{
+    display:block;
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    padding:10px;
+    background-color:#222222;
+    color:#fff;
+}
+
+span.wid-kat-sayi:before{
+    content:'';
+    border-color:transparent #222222 transparent transparent;
+    border-style:solid;
+    border-width:20px;
+    width:0;
+    height:0;
+    position:absolute;
+    left:-35px;
+    bottom:50%;
+    transform:translate(0%,50%);
+}
+
+div.ustfoto {
+    position: absolute;
+    left: 50%;
+    top: -70px;
+    transform: translate(-50%,0%);
+    border: 15px solid #F8F9FC;
+    border-radius:100%;
+}
+
+div.ustfoto img{
+    width:100px;
+    height:100px;
+}
+
+span.katkisitarih{
+    display:inline-block;
+    background-color:#222222;
+    color:#fff;
+    padding:10px;
+    border-left:5px solid #DB385C;
+    transition: all .3s ease-in;
+    background-position:100% 0;
+}
+
+span.katkisitarih:hover{
+    background-color:#DB385C
+}

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<CMS.Models.Kullanici>
+
+@{
+    ViewBag.Title = CMS.Resources.Dil.kullanicilar;
+}
+
+<p>
+    @Html.ActionLink(CMS.Resources.Dil.yeniolustur, "Create", null, new { @class = "btn btn-success" })
+</p>
+<div class="table-responsive ">
+    <table class="table table-bordered kullanicilar">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Kadi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdSoyad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UyelikTarihi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Foto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Yetki)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.Kadi == User.Identity.Name)
+            {
+                continue;
+            }
+            <tr id="tr-@item.Kid">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kadi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdSoyad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UyelikTarihi)
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.Foto)" class="img-thumbnail rounded-circle" width="100" />
+                </td>
+                <td>
+                    @(Html.DisplayFor(modelItem => item.Yetki).ToString().Equals("a") ? "Admin" : CMS.Resources.Dil.kullanici)
+                </td>
+                <td class="text-center">
+                    @Html.ActionLink(CMS.Resources.Dil.duzenle, "Edit", new { id = item.Kid }, new { @class = "btn btn-success mb-1 w-100" })  <br />
+                    <a href="#" data-id="@item.Kid" data-user="@item.AdSoyad" class="btn btn-danger w-100 kullanicisil">@CMS.Resources.Dil.sil</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            $(".kullanicilar").on("click", ".kullanicisil", function () {
+                var id = $(this).data("id");
+                var user = $(this).data("user");
+
+                Swal.fire({
+                    animation: false,
+                    customClass: {
+                        popup: 'animated flipInX'
+                    },
+                    title: '@CMS.Resources.Dil.eminmisin',
+                    text: "@CMS.Resources.Dil.silinecekmetin : " + user,
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: '<i class="fas fa-times"></i>',
+                    confirmButtonText: '<i class="fas fa-check"></i>'
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            method: "POST",
+                            url: "/Admin/Kullanici/Delete/" + id,
+                            dataType: "JSON",
+                            success: function (data) {
+                                Swal.fire(
+                                    data.baslik,
+                                    data.icerik,
+                                    'success'
+                                );
+
+                                $("#tr-" + id).fadeOut(1000);
+                            },
+                            error: function (data) {
+                                Swal.fire(
+                                    '@CMS.Resources.Dil.hata',
+                                    '@CMS.Resources.Dil.birhataolustu',
+                                    'error'
+                                )
+                            }
+                        });
+                    }
+                })
+            });
+        });
+    </script>
+}

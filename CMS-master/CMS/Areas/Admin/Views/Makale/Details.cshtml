@@ -1,0 +1,81 @@
+﻿@model CMS.Models.Makale
+
+@{
+    ViewBag.Title = CMS.Resources.Dil.detaylar + " - " + CMS.Resources.Dil.makale;
+}
+<div>
+    <h4>@CMS.Resources.Dil.makale</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Baslik)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Baslik)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KisaIcerik)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KisaIcerik)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Icerik)
+        </dt>
+
+        <dd>
+            <div class="bg-dark text-light w-100 p-2">
+                @Html.Raw(Model.Icerik)
+            </div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Foto)
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.Foto)" class="img-thumbnail mw-100" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EklenmeTarihi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EklenmeTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GuncellemeTarihi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GuncellemeTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategori.KategoriAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategori.KategoriAdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kullanici.Kadi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kullanici.Kadi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(CMS.Resources.Dil.duzenle, "Edit", new { id = Model.Mid },new {@class="btn btn-success" }) |
+    @Html.ActionLink(CMS.Resources.Dil.listeyedon, "Index",null, new {@class="btn btn-info" })
+</p>

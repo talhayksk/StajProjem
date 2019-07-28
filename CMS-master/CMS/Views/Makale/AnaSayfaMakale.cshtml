@@ -1,0 +1,21 @@
+﻿@model List<CMS.Models.Makale>
+    <div class="card-columns mt-4">
+        @foreach (var item in Model)
+        {
+        <div class="card">
+            @if (item.Foto != null)
+            {
+                <img src="@item.Foto" class="card-img-top">
+            }
+            <div class="card-body">
+                <h5 class="card-title fontozel">@item.Baslik</h5>
+                <p class="card-text">
+                    @item.KisaIcerik
+                </p>
+            </div>
+            <div class="card-body text-right pt-0">
+                <a href="/Makale/Oku/@item.Mid" class="btn btn-outline-iste">@CMS.Resources.Dil.devaminioku</a>
+            </div>
+        </div>
+        }
+    </div>
