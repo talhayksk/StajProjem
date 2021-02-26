@@ -2,7 +2,7 @@
 
 # ASP.NET İle CMS Blog Uygulaması
 
-## Fatih ÖZPOLAT
+
 
 **Özellikler**
 
